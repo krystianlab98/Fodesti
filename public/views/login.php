@@ -9,10 +9,10 @@
           <img src="public/images/logo.svg">
          </div>
          <div class="login-container">
-            <form class="login">
+            <form class="login" action="logged" method="POST">
                 <input class="login-input" name="email" type="text" placeholder="email@email.com">
                 <input class="login-input" name="password" type="password" placeholder="password">
-                 <button>Login</button>
+                 <button type="submit">Login</button>
              </form>
         </div>
     </div>
