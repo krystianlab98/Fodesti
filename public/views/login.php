@@ -6,13 +6,22 @@
 <body>
     <div class="container">
         <div class="logo">
-          <img src="../images/logo.svg">
+          <img src="public/images/logo.svg">
          </div>
          <div class="login-container">
-            <form class="login">
+            <form class="login" action="logged" method="POST">
+                <div class="messages">
+                    <?php
+                    if(isset($messages)){
+                        foreach($messages as $message) {
+                            echo $message;
+                        }
+                    }
+                    ?>
+                </div>
                 <input class="login-input" name="email" type="text" placeholder="email@email.com">
                 <input class="login-input" name="password" type="password" placeholder="password">
-                 <button>Login</button>
+                 <button type="submit">Login</button>
              </form>
         </div>
     </div>

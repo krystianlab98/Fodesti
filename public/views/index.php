@@ -26,7 +26,17 @@
                         <a href="#">Contact</a>
                     </li>
                     <li>
-                        <a href="#">Login</a>
+                        <?php
+                            if($_SESSION['email']){
+                                $log = "Logout";
+                                $href = "http://localhost:8080/logout";
+                                echo "<a href= $href >$log</a>";
+                            } else {
+                                $log = "Login";
+                                $href = "http://localhost:8080/login";
+                                echo "<a href= $href >$log</a>";
+                            }
+                        ?>
                     </li>
                 </ul>
             </div>
