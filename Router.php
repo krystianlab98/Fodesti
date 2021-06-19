@@ -1,7 +1,9 @@
 <?php
 
 require_once 'src/controllers/DefaultController.php';
-require_once 'src/controllers/LoginController.php';
+require_once 'src/controllers/UserController.php';
+require_once 'src/controllers/CategoryController.php';
+require_once 'src/controllers/DishController.php';
 
 class Router {
 
