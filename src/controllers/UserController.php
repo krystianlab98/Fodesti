@@ -6,7 +6,7 @@ require_once __DIR__.'/../repositories/UserRepository.php';
 
 session_start();
 
-class LoginController extends AppController {
+class UserController extends AppController {
 
     private static $haveSession;
 
