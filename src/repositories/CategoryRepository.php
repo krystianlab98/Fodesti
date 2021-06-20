@@ -58,6 +58,20 @@ class CategoryRepository extends Repository
         return $result;
     }
 
+    public function getCategoryIdByCategoryTitle($title){
+        $statement = $this->database->connect()->prepare('
+            SELECT * FROM public.categories WHERE title = :title
+        ');
+
+        $statement->bindParam(':title', $title);
+        $statement->execute();
+
+        $data = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $data['id'];
+
+    }
+
 
 
 }

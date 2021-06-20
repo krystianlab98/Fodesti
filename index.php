@@ -14,5 +14,8 @@ Router::post('createUser', 'UserController');
 Router::post('addCategory', 'CategoryController');
 Router::get('addCategoryView', 'CategoryController');
 Router::get('categories', 'CategoryController');
+Router::get('addDishView', 'DishController');
+Router::post('addDish', 'DishController');
+Router::get('dishes', 'DishController');
 
 Router::run($path);
