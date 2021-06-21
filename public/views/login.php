@@ -2,8 +2,10 @@
 <head>
     <title>Fodest Login Page</title>
     <link rel="stylesheet" type="text/css"  href="public/css/login.css">
+    <link rel="stylesheet" type="text/css"  href="public/css/style.css">
 </head>
 <body>
+    <?php include('public/views/nav.php'); ?>
     <div class="container">
         <div class="logo">
           <img src="public/images/logo.svg">
