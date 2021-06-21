@@ -10,6 +10,10 @@ class UserController extends AppController {
 
     private static $haveSession;
 
+    public function login()
+    {
+        $this->render('login');
+    }
 
     public function logged()
     {

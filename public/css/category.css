@@ -1,0 +1,33 @@
+.category-form > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.category-form > h2 {
+    padding: 1em;
+}
+
+input, textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid gray;
+    padding: 1em;
+    margin: 1em;
+    width: 50%;
+}
+.categories {
+    border: none;
+}
+.categories-box {
+    flex-wrap: wrap;
+    height: 75vh;
+}
+
+.box {
+    height: 25vh;
+    width: 20vw;
+}
+.box > h3 {
+    margin: 0;
+}
