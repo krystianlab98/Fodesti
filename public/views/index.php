@@ -11,45 +11,9 @@
 </head>
 <body>
     <div class="base-container">
-        <nav>
-            <img src="public/images/logo.svg">
-            <div class="menu">
-                <ul>
-                    <li>
-                        <a href="#">Home</a>
-                    </li>
-                    <li>
-                        
-                        <a href="#">Menu</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                    <li>
-                        <?php
-                            if($_SESSION['email']){
-                                $log = "Logout";
-                                $href = "http://localhost:8080/logout";
-                                echo "<a href= $href >$log</a>";
-                            } else {
-                                $log = "Login";
-                                $href = "http://localhost:8080/login";
-                                echo "<a href= $href >$log</a>";
-                            }
-                        ?>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <?php include('public/views/nav.php'); ?>
         <main>
-            <header>
-                <div class="search-bar">
-                    <form class="search-form" action="">
-                        <input class="search-input" placeholder="search" type="search" name="search">
-                        <input class="search-button" type="submit">
-                    </form>
-                </div>
-            </header>
+            <?php include('public/views/searchBar.php'); ?>
             <section class="categories">
                 <h2>Categories</h2>
                 <div class="categories-box">
