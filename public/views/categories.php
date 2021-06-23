@@ -4,6 +4,7 @@
 
     <link rel="stylesheet" type="text/css"  href="public/css/style.css">
     <link rel="stylesheet" type="text/css"  href="public/css/category.css">
+    <script type="text/javascript" src="./public/js/search.js" defer>
     <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -17,12 +18,12 @@
 
                 <?php if(isset($categories)){
                     foreach ($categories as $category): ?>
-<!--                <a class="categories-box" href="http://localhost:8080/dishes?title=--><?//=$category->getTitle()?><!--">-->
+
                     <div class="box">
                         <h3><?= $category->getTitle(); ?></h3>
                         <img class="box-image" src="public/uploads/<?= $category->getImageName(); ?>">
                     </div>
-<!--                </a>-->
+
                 <?php endforeach; } ?>
             </div>
         </section>

@@ -42,4 +42,39 @@ class DishRepository extends Repository
         ]);
     }
 
+    public function getDishByNameOrDescription(string $searchString): array
+    {
+        $searchString = '%'.strtolower($searchString).'%';
+        $statement =  $this->database->connect()->prepare('
+           SELECT * FROM public.dishes WHERE LOWER(name) LIKE :searchString OR LOWER(description) LIKE :searchString
+        ');
+
+        $statement->bindParam(':searchString', $searchString, PDO::PARAM_STR);
+        $statement->execute();
+
+        return$statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+    }
+
+    public function getAllDishes(): array
+    {
+        $result = [];
+        $statement = $this->database->connect()->prepare(
+            'SELECT * FROM public.dishes'
+        );
+        $statement->execute();
+        $dishes = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($dishes as $dish) {
+            $result[] = new Dish(
+                $dish['name'],
+                $dish['image_name'],
+                $dish['description'],
+                $dish['price']
+            );
+        }
+        return $result;
+    }
+
+
 }

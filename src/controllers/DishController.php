@@ -34,7 +34,9 @@ class DishController extends AppController
         $url_components = parse_url($url);
         parse_str($url_components['query'], $params);
         $categoryTitle = $params['title'];
-
+        if($categoryTitle == null) {
+            return$this->render('dishes', ['dishes' => $this->dishRepository->getAllDishes()]);
+        }
 //        $categoryTitle = $_GET('title');
         $categoryId = $this->categoryRepository->getCategoryIdByCategoryTitle($categoryTitle);
 //
@@ -63,6 +65,26 @@ class DishController extends AppController
 
         return $this->render('add-dish', ['messages' => $this->message, 'categories' => $this->categoryRepository->getCategories() ]);
     }
+
+    public function search(){
+
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? $_SERVER["CONTENT_TYPE"] : '';
+
+        if($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header("Content-type: application/json");
+            http_response_code(200);
+            echo json_encode($this->dishRepository->getDishByNameOrDescription($decoded['search']));
+//            return $this->render("dishes");
+        }
+    }
+
+    public function dishesView(){
+        $this->render('dishes');
+    }
+
     private function validate($file): bool
     {
         if($file['size'] > self::MAX_FILE_SIZE) {
@@ -75,5 +97,7 @@ class DishController extends AppController
         }
         return true;
     }
+
+
 
 }
