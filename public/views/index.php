@@ -7,7 +7,9 @@
     <title>Fodesti</title>
 
     <link rel="stylesheet" href="public/css/style.css">
+    <script type="text/javascript" src="./public/js/search.js" defer>
     <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <div class="base-container">

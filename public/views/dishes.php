@@ -3,6 +3,7 @@
     <title>Fodesti Categories</title>
     <link rel="stylesheet" type="text/css"  href="public/css/style.css">
     <link rel="stylesheet" type="text/css"  href="public/css/dish.css">
+    <script type="text/javascript" src="./public/js/search.js" defer>
     <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -22,7 +23,7 @@
                             <img class = "image-dish" src="public/uploads/<?= $dish->getImageName(); ?>">
                             <h4>Opis: <?= $dish->getDescription(); ?></h4>
                             <div class="buttons">
-                                <button name="price">cena: <?= $dish->getPrice(); ?> zł</button>
+                                <p name="price">cena: <?= $dish->getPrice(); ?> zł</p>
                                 <button name="order">Dodaj do koszyka</button>
                             </div>
                         </div>
@@ -32,5 +33,16 @@
     </main>
 </div>
 </body>
+<template id="dishes-template">
+            <div class="box">
+                <h3>name</h3>
+                <img class = "image-dish">
+                <h4>Opis</h4>
+                <div class="buttons">
+                    <p name="price">cena: zł</p>
+                    <button name="order">Dodaj do koszyka</button>
+                </div>
+            </div>
+</template>
 
 
