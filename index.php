@@ -17,5 +17,10 @@ Router::get('categories', 'CategoryController');
 Router::get('addDishView', 'DishController');
 Router::post('addDish', 'DishController');
 Router::get('dishes', 'DishController');
+Router::get('dishesView', 'DishController');
+Router::post("search", 'DishController');
+Router::get("cart", 'OrderController');
+Router::post('order','OrderController');
+Router::get('orders','OrderController');
 
 Router::run($path);
