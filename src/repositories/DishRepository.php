@@ -76,5 +76,28 @@ class DishRepository extends Repository
         return $result;
     }
 
+    public function getDishById(int $id): ?Dish{
+        $statement = $this->database->connect()->prepare(
+            'SELECT * FROM public.dishes WHERE id=:id'
+        );
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $dish = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if($dish == false) {
+            return null;
+        }
+
+        return new Dish(
+            $dish[0]['name'],
+            $dish[0]['image_name'],
+            $dish[0]['description'],
+            $dish[0]['price'],
+            $dish[0]['id'],
+            $dish[0]['categories_id']
+        );
+
+    }
+
 
 }
