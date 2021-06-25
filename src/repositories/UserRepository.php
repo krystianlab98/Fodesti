@@ -15,7 +15,7 @@ class UserRepository extends Repository
         if($user == false) {
             return null;
         }
-        return new User($user["id_user"], $user["email"], $user["password"], $user["name"], $user["surname"], $user["phone"], $user["address"]);
+        return new User($user["id"], $user["email"], $user["password"], $user["name"], $user["surname"], $user["phone"], $user["address"]);
     }
 
 
@@ -50,10 +50,21 @@ class UserRepository extends Repository
             $this->database->connect()->inTransaction();
         } catch (PDOException $exception) {
             $this->database->connect()->rollBack();
-            //var_dump($exception->getMessage());
             throw new Exception("transaction error insert user");
         }
     }
+
+    public function findByEmail($email)
+    {
+        $statement = $this->database->connect()->prepare('
+            SELECT u.id as id, email, password, name, surname, phone, address FROM public.users u
+                  INNER JOIN user_details ud on ud.id = u.id_user_details WHERE email = :email');
+        $statement->bindParam(':email', $email);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+
 
     private function getUserDetailsId(User $user)
     {
@@ -75,10 +86,6 @@ class UserRepository extends Repository
 
         return $data['id'];
     }
-
-
-
-
 
 
 }

@@ -3,28 +3,42 @@
 
 class Dish
 {
-    private $id;
+    private int $id;
     private $name;
     private $imageName;
     private $description;
     private $price;
+    private $categoriesId;
 
-    public function __construct($name, $imageName, $description, $price, $id=null)
+
+    public function __construct($name, $imageName, $description, $price, int $id=null, $categoriesId=null)
     {
         $this->id = $id;
         $this->name = $name;
         $this->imageName = $imageName;
         $this->description = $description;
         $this->price = $price;
+        $this->categoriesId = $categoriesId;
     }
 
-    public function getId()
+
+    public function getCategoriesId()
+    {
+        return $this->categoriesId;
+    }
+
+    public function setCategoriesId($categoriesId): void
+    {
+        $this->categoriesId = $categoriesId;
+    }
+
+    public function getId(): ?int
     {
         return $this->id;
     }
 
 
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }

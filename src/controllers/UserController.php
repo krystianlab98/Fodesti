@@ -42,7 +42,6 @@ class UserController extends AppController {
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
-//        return $this->render("index");
 
         $_SESSION['email'] = $email;
         $url = "http://$_SERVER[HTTP_HOST]";
@@ -81,7 +80,6 @@ class UserController extends AppController {
             $address = $_POST['address'];
 
             $user = new User(null, $email, $password, $name, $surname, $phone, $address);
-            //var_dump($user);
             $userRepository->addUser($user);
             return $this->render("login");
         } else {
@@ -98,6 +96,28 @@ class UserController extends AppController {
             return false;
         }
         return true;
+    }
+
+    public function getUserFromSession(): ?User
+    {
+        if ($this->isUserLogged()) {
+            $userRepository = new UserRepository();
+            return $this->mapUserFromDbToModel($userRepository->findByEmail($_SESSION['email']));
+        }
+        return null;
+    }
+
+
+    public function isUserLogged(): bool{
+        if($_SESSION['email']) {
+            return true;
+        }
+        return false;
+    }
+
+    public function mapUserFromDbToModel($userDb): User
+    {
+        return new User($userDb["id"],$userDb["email"],$userDb["password"],$userDb["name"],$userDb["surname"],$userDb["phone"],$userDb["address"]);
     }
 
 }
