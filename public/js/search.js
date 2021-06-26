@@ -5,32 +5,21 @@ search.addEventListener("keyup", function (event){
 
     if(event.key === "Enter" ) {
 
-        // fetch('/dishesView')
-        //     .then((response)=> {
-        //     return response.text();
-        // }).then((html) => {
-        //     document.body.innerHTML = html
-        // });
-        // fetch("/dishesView").then(window.location.reload(true));
-        // window.location.pathname = '/dishesView'
         event.preventDefault();
         const data = {search: this.value};
-
-
-
         fetch("/search", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         }).then(function (response) {
             return response.json();
         }).then(function (dishes){
+            //window.location.pathname = '/dishesView'
             dishContainer.innerHTML = "";
             loadDishes(dishes);
         });
-
     }
 });
 
