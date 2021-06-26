@@ -1,3 +1,10 @@
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 .dish-form > form {
     display: flex;
     flex-direction: column;
@@ -7,7 +14,9 @@
 .dish-form > h2 {
     padding: 1em;
 }
-
+form {
+    width: 50vw;
+}
 input, textarea {
     background-color: transparent;
     border: none;
@@ -20,6 +29,7 @@ input, textarea {
 
 .dishes {
     border: black 1px solid;
+
 
 }
 .dishes-box {
@@ -42,7 +52,7 @@ input, textarea {
     width: 20vw;
     height: 40vh;
     text-align: center;
-    border: black 1px solid;
+    /*border: black 1px solid;*/
     position: relative;
 }
 
@@ -63,4 +73,13 @@ h3,h4 {
     flex-direction: row;
     bottom: 0;
 
+}
+
+button {
+    margin: 1em 0;
+    background: transparent linear-gradient(180deg, #B6CF86BF 0%, #258C2BBF 100%) 0% 0% no-repeat padding-box;
+    border: 1px solid #707070;
+    border-radius: 39px;
+    height: 4vh;
+    width: 10vw;
 }
