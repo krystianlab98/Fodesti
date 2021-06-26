@@ -14,6 +14,9 @@
         <?php include('public/views/searchBar.php'); ?>
         <section class="categories">
             <h2>Categories</h2>
+            <?php if(isset($user) && $user->getRole() == "ADMIN") { ?>
+            <button id="addCategory" type="button">Dodaj nową kategorie</button>
+            <?php } ?>
             <div class="categories-box">
 
                 <?php if(isset($categories)){
@@ -25,10 +28,15 @@
                     </div>
 
                 <?php endforeach; } ?>
-            </div>
+            </div>2
         </section>
     </main>
 </div>
 </body>
+<script>
+    document.getElementById("addCategory").onclick = function () {
+        location.href = "http://localhost:8080/addCategoryView";
+    }
+</script>
 
 
