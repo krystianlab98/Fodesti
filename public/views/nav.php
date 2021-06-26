@@ -3,23 +3,33 @@
     <div class="menu">
         <ul>
             <li>
-                <a href="#">Home</a>
+                <a href="http://localhost:8080">Home</a>
             </li>
             <li>
 
-                <a href="#">Menu</a>
+                <a href="http://localhost:8080/dishes">Menu</a>
             </li>
             <?php
             if($_SESSION['email']){
+                $log = "Zamówienia";
+                $href = "http://localhost:8080/orders";  ?>
+                <li>
+                    <?php
+                    echo "<a href= $href >$log</a>"
+                    ?>
+                </li>
+            <?php  } ?>
+            <?php
+            if($_SESSION['email']){
                 $log = "Koszyk";
-                $href = "http://localhost:8080/order";  ?>
+                $href = "http://localhost:8080/cart";  ?>
                 <li>
                     <?php
                     echo "<a href= $href >$log</a>"
                     ?>
                 </li>
                 <?php  } ?>
-            </li>
+
             <li>
                 <?php
                 if($_SESSION['email']){
