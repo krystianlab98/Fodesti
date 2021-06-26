@@ -3,15 +3,15 @@
 
 class Dish
 {
-    private int $id;
+    private ?int $id;
     private $name;
     private $imageName;
     private $description;
     private $price;
-    private $categoriesId;
+    private ?int $categoriesId;
 
 
-    public function __construct($name, $imageName, $description, $price, int $id=null, $categoriesId=null)
+    public function __construct($name, $imageName, $description, $price, ?int $id, ?int $categoriesId)
     {
         $this->id = $id;
         $this->name = $name;
