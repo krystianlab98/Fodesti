@@ -5,6 +5,7 @@ require_once __DIR__ .'/../models/Dish.php';
 require_once __DIR__.'/../repositories/OrderRepository.php';
 require_once __DIR__.'/../controllers/UserController.php';
 
+session_start();
 class OrderController extends AppController
 {
     private Order $order;
@@ -20,7 +21,7 @@ class OrderController extends AppController
         $this->userController = new UserController();
         $this->orderRepository = new OrderRepository();
         $this->dishRepository = new DishRepository();
-        $this->order = new Order($this->userController->getUserFromSession(), array());
+        $this->order = new Order($this->userController->getUserFromSession(), array(), $this->userController->getUserFromSession()->getAddress(), null, null,);
         $this->dishes = array();
     }
 
@@ -36,8 +37,13 @@ class OrderController extends AppController
         $this->order->setDishes($this->dishes);
 
         $this->order->addPriceToTotalAmount($dish1->getPrice()+ $dish2->getPrice() + $dish3->getPrice());
+//        if( $this->isOrderInSession()){
+//            $order = $_SESSION['order'];
+//            return $this->render('order', ['order' => $order]);
+//        }
 
-        return $this->render('order', ['order' => $this->order]);
+
+        return $this->render('order', ['order' =>$this->order]);
     }
 
     /**
@@ -78,20 +84,34 @@ class OrderController extends AppController
     }
 
 
-    public function addDishToOrder(Dish $dish)
+    public function addDishToOrder()
     {
-        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? $_SERVER["CONTENT_TYPE"] : '';
+        $content = trim(file_get_contents("php://input"));
+        $decoded = json_decode($content, true);
+        $id = $decoded['id'];
+        $order = null;
+       if( $this->isOrderInSession()){
+            $order = json_decode($_SESSION['order']);
+       } else {
 
-        if ($contentType === "application/json") {
-            $content = trim(file_get_contents("php://input"));
-            $decoded = json_decode($content, true);
+           $user = $this->userController->getUserFromSession();
+           $order =   new Order($user, array(), $user->getAddress(), null, null);
+           $_SESSION['order'] = json_encode($order);
+       }
+       $dish = $this->dishRepository->getDishById($id);
 
-            header("Content-type: application/json");
-            http_response_code(200);
+        var_dump($_SESSION['order']);
+        $order->addDish($dish);
+        $order->addPriceToTotalAmount($dish->getPrice());
 
-            $this->order->addDish($dish);
-            $this->order->addPriceToTotalAmount($dish->getPrice());
-        }
+        header("Content-type: application/json");
+        http_response_code(200);
+
+    }
+
+    public function isOrderInSession(): bool
+    {
+       return isset($_SESSION['order']);
     }
 
 
