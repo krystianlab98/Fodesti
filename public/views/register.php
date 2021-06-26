@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css"  href="public/css/style.css">
 
 
-    <script type="text/javascript" src = "./public/js/script.js" defer></script>
+    <script type="text/javascript" src = "./public/js/register.js" defer></script>
     <title>Fodesti Register Page</title>
 </head>
 <body>
