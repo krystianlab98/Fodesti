@@ -7,7 +7,8 @@
     <title>Fodesti</title>
 
     <link rel="stylesheet" href="public/css/style.css">
-    <script type="text/javascript" src="./public/js/search.js" defer>
+    <script type="text/javascript" src="./public/js/search.js" defer></script>
+    <script type="text/javascript" src="./public/js/redirectIndex.js" defer></script>
     <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
 
 </head>
@@ -16,7 +17,7 @@
         <?php include('public/views/nav.php'); ?>
         <main>
             <?php include('public/views/searchBar.php'); ?>
-            <section class="categories">
+            <section id="categories" class="categories">
                 <h2>Categories</h2>
                 <div class="categories-box">
                     <div class="box">
@@ -33,20 +34,40 @@
                     </div>
                 </div>
             </section>
-            <section class="food-menu">
+            <section id="dishes" class="food-menu">
                     <h2>Menu</h2>
-                    <div class="box-food-menu">
-                        Food Menu
+                <div class="dishes-box">
+                    <div class="box-dish">
+                        <h3>Burger</h3>
+                        <img class="box-image" src="public/images/burger.jpg" alt="">
+                        <h5>Opis</h5>
+                        <p>cena: zł</p>
                     </div>
-                    <div class="box-food-menu">
-                        Food Menu
+                    <div class="box-dish">
+                        <h3>Burger</h3>
+                        <img class="box-image" src="public/images/burger.jpg" alt="">
+                        <h5>Opis</h5>
+                        <p>cena: zł</p>
                     </div>
-                    <div class="box-food-menu">
-                        Food Menu
+                    <div class="box-dish">
+                        <h3>Burger</h3>
+                        <img class="box-image" src="public/images/burger.jpg" alt="">
+                        <h5>Opis</h5>
+                        <p>cena: zł</p>
                     </div>
-                    <div class="box-food-menu">
-                        Food Menu
+                    <div class="box-dish">
+                        <h3>Burger</h3>
+                        <img class="box-image" src="public/images/burger.jpg" alt="">
+                        <h5>Opis</h5>
+                        <p>cena: zł</p>
                     </div>
+                    <div class="box-dish">
+                        <h3>Burger</h3>
+                        <img class="box-image" src="public/images/burger.jpg" alt="">
+                        <h5>Opis</h5>
+                        <p>cena: zł</p>
+                    </div>
+                </div>
             </section>
             <footer>
                 <div class="social">
