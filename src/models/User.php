@@ -1,15 +1,16 @@
 <?php
 
 class User {
-    private $id;
+    private ?int $id;
     private $email;
     private $password;
     private $name;
     private $surname;
     private $phone;
     private $address;
+    private $role;
 
-    public function __construct($id, $email, $password, $name, $surname, $phone, $address)
+    public function __construct(?int $id, $email, $password, $name, $surname, $phone, $address, $role)
     {
         $this->id = $id;
         $this->email = $email;
@@ -18,17 +19,28 @@ class User {
         $this->surname = $surname;
         $this->phone = $phone;
         $this->address = $address;
+        $this->role = $role;
     }
 
-
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
+
     public function setId($id): void
     {
         $this->id = $id;
+    }
+
+    public function setRole($role): void
+    {
+        $this->role = $role;
+    }
+
+    public function getRole()
+    {
+        return $this->role;
     }
 
 

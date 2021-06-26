@@ -7,7 +7,10 @@ class UserRepository extends Repository
 {
     public  function getUser(string $email): ?User {
         $statement = $this->database->connect()->prepare('
-            SELECT * FROM public.users as u INNER JOIN public.user_details as ud ON u.id_user_details = ud.id WHERE u.email = :email 
+            SELECT * FROM public.users as u 
+                INNER JOIN public.user_details as ud ON u.id_user_details = ud.id 
+                INNER JOIN user_role ur on ur.id = u.id_user_role
+                WHERE u.email = :email 
         ');
         $statement->bindParam(':email', $email);
         $statement->execute();
@@ -15,7 +18,7 @@ class UserRepository extends Repository
         if($user == false) {
             return null;
         }
-        return new User($user["id"], $user["email"], $user["password"], $user["name"], $user["surname"], $user["phone"], $user["address"]);
+        return new User($user["id"], $user["email"], $user["password"], $user["name"], $user["surname"], $user["phone"], $user["address"], $user['role']);
     }
 
 
@@ -57,8 +60,10 @@ class UserRepository extends Repository
     public function findByEmail($email)
     {
         $statement = $this->database->connect()->prepare('
-            SELECT u.id as id, email, password, name, surname, phone, address FROM public.users u
-                  INNER JOIN user_details ud on ud.id = u.id_user_details WHERE email = :email');
+           SELECT u.id as id, email, password, name, surname, phone, address, role FROM public.users u
+                    INNER JOIN user_details ud on ud.id = u.id_user_details 
+                    INNER JOIN user_role ur on ur.id = u.id_user_role
+                    WHERE email = :email');
         $statement->bindParam(':email', $email);
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
