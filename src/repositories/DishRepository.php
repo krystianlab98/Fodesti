@@ -20,7 +20,9 @@ class DishRepository extends Repository
                 $dish['name'],
                 $dish['image_name'],
                 $dish['description'],
-                $dish['price']
+                $dish['price'],
+                $dish['id'],
+                $dish['categories_id']
             );
         }
         return $result;
@@ -70,7 +72,9 @@ class DishRepository extends Repository
                 $dish['name'],
                 $dish['image_name'],
                 $dish['description'],
-                $dish['price']
+                $dish['price'],
+                $dish['id'],
+                $dish['categories_id']
             );
         }
         return $result;

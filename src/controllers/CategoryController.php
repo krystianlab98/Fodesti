@@ -11,12 +11,14 @@ class CategoryController extends AppController
     private array $messages = [];
     private array $categories = [];
     private CategoryRepository $categoryRepository;
+    private UserController $userController;
 
 
     public function __construct()
     {
         parent::__construct();
         $this->categoryRepository = new CategoryRepository();
+        $this->userController = new UserController();
     }
 
 
@@ -25,8 +27,10 @@ class CategoryController extends AppController
     }
 
     public function categories(){
+        $user = $this->userController->getUserFromSession();
         $this->render('categories', [
-            'categories' => $this->categoryRepository->getCategories()
+            'categories' => $this->categoryRepository->getCategories(),
+            'user'=>$user
         ]);
     }
 

@@ -3,14 +3,14 @@
 
 class Order
 {
-    private $id;
+    private ?int $id;
     private User $purchaser;
-    private array $dishes;
-    private $address;
-    private $totalAmount;
+    private ?array $dishes;
+    private ?string $address;
+    private ?int $totalAmount;
 
 
-    public function __construct(User $purchaser, array $dishes=null, $address=null, $id=null, $totalAmount = null)
+    public function __construct(User $purchaser, ?array $dishes,?string $address, ?int $id, ?int $totalAmount )
     {
         $this->id = $id;
         $this->purchaser = $purchaser;
@@ -20,7 +20,7 @@ class Order
     }
 
 
-    public function getTotalAmount()
+    public function getTotalAmount(): ?int
     {
         return $this->totalAmount;
     }
@@ -38,7 +38,7 @@ class Order
         $this->setTotalAmount($this->getTotalAmount() - $price);
     }
 
-    public function getAddress()
+    public function getAddress(): ?string
     {
         return $this->address;
     }
@@ -49,7 +49,7 @@ class Order
     }
 
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -84,11 +84,9 @@ class Order
         $this->dishes = $dishes;
     }
 
-    public function addDish($dish){
+    public function addDish($dish): void{
         array_push($this->dishes, $dish);
     }
-
-
 
 
 }

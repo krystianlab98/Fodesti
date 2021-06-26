@@ -12,6 +12,7 @@ class DishController extends AppController
     const UPLOAD_DIRECTORY = '/../public/uploads/';
     private CategoryRepository $categoryRepository;
     private DishRepository $dishRepository;
+    private UserController $userController;
     private array $messages = [];
 
     public function __construct()
@@ -19,6 +20,7 @@ class DishController extends AppController
         parent::__construct();
         $this->categoryRepository = new CategoryRepository();
         $this->dishRepository = new DishRepository();
+        $this->userController = new UserController();
     }
 
     public function addDishView(){
@@ -34,14 +36,18 @@ class DishController extends AppController
         $url_components = parse_url($url);
         parse_str($url_components['query'], $params);
         $categoryTitle = $params['title'];
+
+        $user = $this->userController->getUserFromSession();
+
         if($categoryTitle == null) {
-            return$this->render('dishes', ['dishes' => $this->dishRepository->getAllDishes()]);
+            return$this->render('dishes',
+                ['dishes' => $this->dishRepository->getAllDishes(), 'user'=>$user]);
         }
 //        $categoryTitle = $_GET('title');
         $categoryId = $this->categoryRepository->getCategoryIdByCategoryTitle($categoryTitle);
 //
         $dishes = $this->dishRepository->findDishesByCategoryId($categoryId);
-        $this->render('dishes', ['dishes' => $dishes]);
+        $this->render('dishes', ['dishes' => $dishes, 'user'=>$user]);
 
     }
 
@@ -53,7 +59,7 @@ class DishController extends AppController
             );
 
 
-            $dish = new Dish($_POST['name'], $_FILES['file']['name'], $_POST['description'], $_POST['price']);
+            $dish = new Dish($_POST['name'], $_FILES['file']['name'], $_POST['description'], $_POST['price'], null, null);
             $categoryId = $this->categoryRepository->getCategoryIdByCategoryTitle($_POST['title']);
             $this->dishRepository->addDish($dish, $categoryId);
 
@@ -69,7 +75,6 @@ class DishController extends AppController
     public function search(){
 
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? $_SERVER["CONTENT_TYPE"] : '';
-
         if($contentType === "application/json") {
             $content = trim(file_get_contents("php://input"));
             $decoded = json_decode($content, true);
@@ -77,8 +82,8 @@ class DishController extends AppController
             header("Content-type: application/json");
             http_response_code(200);
             echo json_encode($this->dishRepository->getDishByNameOrDescription($decoded['search']));
-//            return $this->render("dishes");
         }
+
     }
 
     public function dishesView(){

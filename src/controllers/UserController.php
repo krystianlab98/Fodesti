@@ -38,11 +38,11 @@ class UserController extends AppController {
             return $this->render('login', ['messages' => ['User with this email not exist!']]);
         }
 
-        if ($user->getPassword() !== $password) {
+        if (!password_verify($password, $user->getPassword())) {
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
-
+        
         $_SESSION['email'] = $email;
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}");
@@ -79,7 +79,7 @@ class UserController extends AppController {
             $phone = $_POST['phone'];
             $address = $_POST['address'];
 
-            $user = new User(null, $email, $password, $name, $surname, $phone, $address);
+            $user = new User(null, $email, $password, $name, $surname, $phone, $address, "USER");
             $userRepository->addUser($user);
             return $this->render("login");
         } else {
@@ -117,7 +117,7 @@ class UserController extends AppController {
 
     public function mapUserFromDbToModel($userDb): User
     {
-        return new User($userDb["id"],$userDb["email"],$userDb["password"],$userDb["name"],$userDb["surname"],$userDb["phone"],$userDb["address"]);
+        return new User($userDb["id"],$userDb["email"],$userDb["password"],$userDb["name"],$userDb["surname"],$userDb["phone"],$userDb["address"], $userDb["role"]);
     }
 
 }

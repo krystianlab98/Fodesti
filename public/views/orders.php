@@ -7,7 +7,7 @@
 <body>
 <?php include('public/views/nav.php'); ?>
 <div class="container">
-    <h1>Zamówienie</h1>
+    <h1>Historia zamówień</h1>
     <?php if(isset($orders)){
     foreach ($orders as $order): ?>
     <div class="order-container" action="order" method="POST">
